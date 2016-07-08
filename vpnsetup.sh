@@ -77,7 +77,10 @@ if [ -z "$VPN_IPSEC_PSK" ] || [ -z "$VPN_USER" ] || [ -z "$VPN_PASSWORD" ]; then
 fi
 
 # Save credentials for easier retrieval later
-cat > /etc/vpnsetup.secrets.sh <<EOF
+vpn_secrets_file=/etc/vpnsetup.secrets.sh
+touch $vpn_secrets_file
+chmod 600 $vpn_secrets_file
+cat > $vpn_secrets_file <<EOF
 export VPN_IPSEC_PSK="$VPN_IPSEC_PSK"
 export VPN_USER="$VPN_USER"
 export VPN_PASSWORD="$VPN_PASSWORD"
