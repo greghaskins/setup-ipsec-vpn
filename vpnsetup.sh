@@ -76,6 +76,13 @@ if [ -z "$VPN_IPSEC_PSK" ] || [ -z "$VPN_USER" ] || [ -z "$VPN_PASSWORD" ]; then
   exiterr "All VPN credentials must be specified. Edit the script and re-enter them."
 fi
 
+# Save credentials for easier retrieval later
+cat > /etc/vpnsetup.secrets.sh <<EOF
+export VPN_IPSEC_PSK="$VPN_IPSEC_PSK"
+export VPN_USER="$VPN_USER"
+export VPN_PASSWORD="$VPN_PASSWORD"
+EOF
+
 if [ "$(sed 's/\..*//' /etc/debian_version 2>/dev/null)" = "7" ]; then
 cat <<'EOF'
 IMPORTANT: Workaround required for Debian 7 (Wheezy).
